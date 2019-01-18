@@ -17,6 +17,7 @@
 
 % No dot before number of articles
 \usepackage{xpatch}
+\usepackage{etaremune}
 \xpatchbibmacro{volume+number+eid}{\setunit*{\adddot}}{}{}{}
 
 % Remove In: for an article.
@@ -32,14 +33,25 @@
 \setlength{\bibhang}{.9cm}
 %\renewcommand{\bibfont}{\fontsize{12}{14}}
 
-\renewcommand*{\bibitem}{\addtocounter{papers}{1}\item \mbox{}\hskip-0.9cm\hbox to 0.9cm{\hfill\arabic{papers}.~\,}}
+
+% Changes to accommodate reverse numbering of pubs
+%    see https://github.com/rzach/cv-zach/blob/master/rz-vita.sty
+\renewcommand*{\bibitem}{\addtocounter{papers}{1}\item}
 \defbibenvironment{bibliography}
-{\list{}
-  {\setlength{\leftmargin}{\bibhang}%
-   \setlength{\itemsep}{\bibitemsep}%
-   \setlength{\parsep}{\bibparsep}}}
-{\endlist}
+{\begin{etaremune}%{\list{}
+		{\setlength{\leftmargin}{\bibhang}%
+			\setlength{\itemsep}{\bibitemsep}%
+			\setlength{\parsep}{\bibparsep}}}
+	{\end{etaremune}}%{\endlist}
 {\bibitem}
+%\renewcommand*{\bibitem}{\addtocounter{papers}{1}\item \mbox{}\hskip-0.9cm\hbox to 0.9cm{\hfill\arabic{papers}.~\,}}
+%\defbibenvironment{bibliography}
+%{\list{}
+%  {\setlength{\leftmargin}{\bibhang}%
+%   \setlength{\itemsep}{\bibitemsep}%
+%   \setlength{\parsep}{\bibparsep}}}
+%{\endlist}
+%{\bibitem}
 
 \renewcommand{\bibfont}{\normalfont\fontsize{10}{12.4}\selectfont}
 % Counters for keeping track of papers
